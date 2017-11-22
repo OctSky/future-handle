@@ -15,7 +15,7 @@
 
     <properties>
         <google.zxing.core.version>3.3.1</google.zxing.core.version>
-
+        <google.zxing.j2se.version>3.3.0</google.zxing.j2se.version>
     </properties>
 
     <dependencies>
@@ -29,6 +29,11 @@
                 <groupId>com.google.zxing</groupId>
                 <artifactId>core</artifactId>
                 <version>${google.zxing.core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>javase</artifactId>
+                <version>${google.zxing.j2se.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

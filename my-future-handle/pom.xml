@@ -10,5 +10,14 @@
     </parent>
     <artifactId>my-future-handle</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+        </dependency>
+    </dependencies>
 </project>
