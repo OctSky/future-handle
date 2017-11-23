@@ -3,7 +3,7 @@ package com.zjh.future;
 import com.zjh.future.utils.QRCodeUtil;
 
 /**
- * Created by zhangjh on 2017/11/21.
+ * @author zhangjh
  */
 public class Main {
     public static void main(String[] args) throws Throwable {

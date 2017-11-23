@@ -16,10 +16,33 @@
     <properties>
         <google.zxing.core.version>3.3.1</google.zxing.core.version>
         <google.zxing.j2se.version>3.3.0</google.zxing.j2se.version>
+        <commons-chain.version>1.2</commons-chain.version>
+        <lombok.version>1.16.18</lombok.version>
+        <guava.version>23.0</guava.version>
+        <spring.version>5.0.1.RELEASE</spring.version>
+        <cglib.version>3.2.5</cglib.version>
+        <logback.version>1.2.3</logback.version>
+        <commons-lang3.version>3.7</commons-lang3.version>
+        <junit.version>4.12</junit.version>
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>${cglib.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -35,6 +58,55 @@
                 <artifactId>javase</artifactId>
                 <version>${google.zxing.j2se.version}</version>
             </dependency>
+
+            <!--职责链模式-->
+            <dependency>
+                <groupId>commons-chain</groupId>
+                <artifactId>commons-chain</artifactId>
+                <version>${commons-chain.version}</version>
+            </dependency>
+
+            <!--guava-->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <!--spring-->
+            <!--spring-webmvc包含spring-web，而spring-web包含很多spring核心包，如spring-context,spring-beans,spring-aop等-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <!--spring-aspects包含spring-tx等在内的包，且若想web容器启动时初始化spring容器，则须引入此包-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <!--logback-->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+
+            <!--test-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -44,6 +116,10 @@
                 <!--编译插件-->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
                 <version>3.7.0</version>
             </plugin>
             <!--发布插件-->
@@ -57,6 +133,15 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <!--javadoc生成插件-->
             <plugin>

@@ -1,0 +1,53 @@
+<configuration scan="false" debug="false">
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${catalina.home}/logs/bizlog/error.log</File>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <encoder>
+            <pattern>[%d{yyyy/MM/dd-HH:mm:ss.SSS}] [%thread]-[%X{requestId}] %-5level %logger{12} %X{traceId} %X{userId} %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina.home}/logs/bizlog/bak_error/error-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <CleanHistoryOnStart>false</CleanHistoryOnStart>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="SERVICE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${catalina.home}/logs/bizlog/service.log</File>
+        <encoder>
+            <pattern>[%d{yyyy/MM/dd-HH:mm:ss.SSS}] [%thread]-[%X{requestId}] %-5level %logger{12} %X{traceId} %X{userId} %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina.home}/logs/bizlog/bak_error/service-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <CleanHistoryOnStart>false</CleanHistoryOnStart>
+        </rollingPolicy>
+    </appender>
+
+    <!--日志异步中转器，用于对大量日志异步处理-->
+    <appender name="SERVICE_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <!--默认blockingQueue大小为256，队列深度会影响性能-->
+        <queueSize>1024</queueSize>
+        <!--默认情形下，如果blockingQueue剩余容量不足20%时，将会丢弃TRACT、DEBUG、INFO级别的日志-->
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="SERVICE"/>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%d{yyyy/MM/dd-HH:mm:ss.SSS}] [%thread -%X{traceId}] %-5level [%logger{36}:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.apache" level="OFF"/>
+    <logger name="org.springframework" level="OFF"/>
+
+    <root level="INFO">
+        <appender-ref ref="SERVICE_ASYNC"/>
+        <appender-ref ref="ERROR"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>
