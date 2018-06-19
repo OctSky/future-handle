@@ -1,6 +1,5 @@
 package com.zjh.future;
 
-import com.zjh.future.utils.QRCodeUtil;
 import com.zjh.future.utils.algorithm.BitCalculationUtil;
 
 /**
