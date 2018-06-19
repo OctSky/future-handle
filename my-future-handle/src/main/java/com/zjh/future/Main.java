@@ -1,24 +1,23 @@
 package com.zjh.future;
 
 import com.zjh.future.utils.QRCodeUtil;
+import com.zjh.future.utils.algorithm.BitCalculationUtil;
 
 /**
  * @author zhangjh
  */
 public class Main {
     public static void main(String[] args) throws Throwable {
-        //二维码编码
-        String content = "     人的生活就像投资价值一样，是存在均值回归的。那个均值，就是你内心最深处的冲动，是你真正的欲望，是你到底是一个怎样的人。\n" +
-                "     在一个经济自由度越来越高，门槛对一个人的发展束缚越来越低的社会，到底是什么决定了你要走的路？到底是什么让一些看起来特别优秀的人，后来成了很平凡的人，而又让一些看起来平平无奇的人，后来做出了一些似乎超出他水平的事情。\n" +
-                "     我想这样东西在今天和在两千年前是没有区别的。那就是你内心的渴望，也就是佛家所说的愿。\n" +
-                "     我不是要评判任何人的生活选择。人生最大的幸福就是求仁得仁。平淡生活也好，激烈拼搏也罢，只要最终获得了你想要的，所有的生活都值得被祝福。人生任何一个阶段的“筛选”都只是一种形式，别被这些一时的标准迷惑了心。定义你最终归宿的，一定是你能力和欲望综合的那个真实的自己。\n" +
-                "     我曾无数次地思考“我希望如何度过这一生”，小时候的答案是“成为一个伟人”，读中学时的答案是“成为一个优秀的人”，随着涉世的深入和自我认知的提升，我认识到，万物并非非黑即白，每一个伟人都是普通人，每一个普通人又都不平凡，答案便逐渐成为了“做自己”。那自己又是什么样的呢？\n" +
-                "     读万卷书、行万里路、阅无数人、有无数感悟，有份可自由支配时间的工作，不必有很多钱但也无须为钱而烦恼。择一座城市安顿下来，这座城市不大，远离喧嚣，宁静安详。在这座小城里有个自己的院落，院子里有块不大的菜地和花园，种些瓜果菜蔬，养养花、逗逗鸟。初春清晨，绿芽悄悄冒出枝头；夏日午后，葡萄藤下凉风习习；秋季傍晚，枝头累累，瓜果飘香；冬日夜晚，窗外呼呼风声夹杂着偶尔的狗吠。陪伴父母，养个孩子，享受为人父母、为人子女的乐趣，隔三差五和三、五好友时常聚聚，谈天、谈地、谈宇宙繁星、时局政治、哲学、艺术，也谈家长里短、婚丧嫁娶、油盐酱醋。细数岁月流年，让日子过得慢一些，再慢一些，任时光惊艳、岁月温柔。";
-        String filePath = "C:/Users/zhangjh/Desktop/test.png";
-        QRCodeUtil.encodeToFile(content, filePath, "png", 600, 600);
-
+//        //二维码编码
+//        String content = "曾经，有一份真挚的爱摆在我面前，我却没有珍惜，等到失去的时候才后悔莫及。如果上天能再给我一次机会的话，我要对那个女孩子说三个字：" +
+//                "\"我爱你\"！如果非要为这份爱加一个期限的话，我希望是一辈子！";
+//        String filePath = "C:/Users/zhangjh/Desktop/test.png";
+//        QRCodeUtil.encodeToFile(content, filePath, "png", 300, 300);
+//
 //        //二维码解码
 //        String str = QRCodeUtil.decodeFromFile(filePath);
 //        System.out.println("二维码解码：" + str);
+
+        System.out.println(BitCalculationUtil.sum(1,3));
     }
 }
