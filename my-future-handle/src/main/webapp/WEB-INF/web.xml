@@ -5,7 +5,16 @@
          version="3.0" metadata-complete="false">
     <display-name>fs-enterprise-customerservice-provider</display-name>
     <distributable/>
+    <!--
+    应用启动过程：
+    1、web容器启动，为web应用创建全局ServletContext上下文
+    2、触发web容器启动事件，被ContextLoaderListener监听，在contextInitialized方法中spring初始化根容器即WebApplicationContext，这里是XmlWebApplicationContext，这里没有被配置为延迟加载的单例bean都会被创建。根容器初始化完成后，spring以WeApplicationContext.ROOTWEBAPPLICATIONCONTEXT作为属性，将根应用上下文放入ServletContext中。
+    3、初始化web.xml中配置的servlet，这里的DispatcherServlet将从ServletContext中获取spring根容器，并以其为父容器来创建自己的上下文。
+    因此此处会初始化两个容器，ContextLoaderListener启动的根容器主要用于管理整个应用中所需的公共组件，如dao、service等，而DispatcherServlet启动的容器则主要管理和Servlet相关的组件，如controller等。父容器不能访问子容器中的bean，子容器则可以访问父容器的。当子容器自身找不到bean时将到父容器中查找，这也是servlet的配置与spring的配置中的路径扫描范围不要相互交叉的原因。也是controller能够访问service等组件的原因。
+    特别要注意对于容器事件的监听，要考虑两个容器会产生两次事件
+    -->
 
+    <!--配置web容器启动时初始化spring容器-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:applicationContext.xml</param-value>
@@ -13,6 +22,8 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+
+    <!--配置spring mvc控制器-->
     <servlet>
         <servlet-name>future</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

@@ -11,7 +11,7 @@
 
     <modules>
         <module>my-future-handle</module>
-        <module>spring-boot-model</module>
+        <module>spring-boot</module>
     </modules>
 
     <properties>
@@ -25,6 +25,9 @@
         <logback.version>1.2.3</logback.version>
         <commons-lang3.version>3.7</commons-lang3.version>
         <junit.version>4.12</junit.version>
+        <java-servlet.version>3.0.1</java-servlet.version>
+        <gson.version>2.8.2</gson.version>
+        <okhttp.version>3.9.1</okhttp.version>
     </properties>
 
     <dependencies>
@@ -43,6 +46,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
         </dependency>
     </dependencies>
 
@@ -108,6 +116,20 @@
                 <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${java-servlet.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!--OKHttp3-->
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -117,11 +139,11 @@
                 <!--编译插件-->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
-                <version>3.7.0</version>
             </plugin>
             <!--发布插件-->
             <plugin>
@@ -144,6 +166,12 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- resource插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+            </plugin>
             <!--javadoc生成插件-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -155,6 +183,12 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.0.2</version>
+            </plugin>
+            <!-- dependency插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.10</version>
             </plugin>
             <!--部署插件-->
             <plugin>
@@ -173,6 +207,12 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.0.0</version>
+            </plugin>
+            <!--骨架生成插件-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-archetype-plugin</artifactId>
+                <version>3.0.1</version>
             </plugin>
         </plugins>
     </build>

@@ -12,6 +12,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeReader;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -61,8 +62,9 @@ public class QRCodeUtil {
      * @throws Exception 异常
      */
     public static BitMatrix encode2Bit(String content, int width, int height) throws Exception {
-        Map<EncodeHintType, Object> hintMap = new HashMap<>(1);
+        Map<EncodeHintType, Object> hintMap = new HashMap<>(2);
         hintMap.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+        hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
         return codeWriter.encode(content, BarcodeFormat.QR_CODE, width, height, hintMap);
     }
 

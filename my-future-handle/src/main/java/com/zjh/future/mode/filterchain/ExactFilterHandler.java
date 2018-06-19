@@ -23,7 +23,7 @@ public class ExactFilterHandler implements Filter {
     public boolean execute(Context context) throws Exception {
         /**
          * 功能节点自身处理请求的逻辑
-         * 返回false则不再向后继节点传递
+         * 返回true则不再向后继节点传递
          */
         ChainContext chainContext = (ChainContext) context;
         int order = chainContext.getOrder();
